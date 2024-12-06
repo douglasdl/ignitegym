@@ -21,12 +21,12 @@ npx create-expo-app --template
 ```
 
 
-Install the [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver/blob/master/DOCS.md) development dependency:
+Don't need to install the [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver/blob/master/DOCS.md) development dependency anymore:
 ```sh
 npm install --save-dev babel-plugin-module-resolver
 ```
 
-Edit the file babel.config.js to the the plugins after the (presets: ['babel-preset-expo'], line):
+Instead of edit the file babel.config.js to the the plugins after the (presets: ['babel-preset-expo'], line):
 ```js
 plugins: [
 	[
@@ -49,47 +49,41 @@ plugins: [
 	],
 ],
 ```
+Edit the "tsconfig.json" adding this is as a new item in the "compilerOptions":
+```json
+"paths": {
+  "@dtos/*": ["./src/dtos/*"],
+  "@assets/*": ["./src/assets/*"],
+  "@components/*": ["./src/components/*"],
+  "@screens/*": ["./src/screens/*"],
+  "@storage/*": ["./src/storage/*"],
+  "@utils/*": ["./src/utils/*"],
+  "@services/*": ["./src/services/*"],
+  "@hooks/*": ["./src/hooks/*"],
+  "@contexts/*": ["./src/contexts/*"],
+  "@routes/*": ["./src/routes/*"]
+}
+```
 
 Update the tsconfig.json to be like this:
 ```json
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-		"strict": true,
-		"baseUrl": "./",
-		"paths": {
-			"@dtos/*": [
-				"src/dtos/*"
-			],
-			"@assets/*": [
-				"./src/assets/*"
-			],
-			"@components/*": [
-				"./src/components/*"
-			],
-			"@screens/*": [
-				"./src/screens/*"
-			],
-			"@storage/*": [
-				"./src/storage/*"
-			],
-			"@utils/*": [
-				"./src/utils/*"
-			],
-			"@services/*": [
-				"./src/services/*"
-			],
-			"@hooks/*": [
-				"./src/hooks/*"
-			],
-			"@contexts/*": [
-				"./src/contexts/*"
-			],
-			"@routes/*": [
-				"./src/routes/*"
-			]
-		}
-	}
+    "strict": true,
+    "paths": {
+      "@dtos/*": ["./src/dtos/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@screens/*": ["./src/screens/*"],
+      "@storage/*": ["./src/storage/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@services/*": ["./src/services/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@contexts/*": ["./src/contexts/*"],
+      "@routes/*": ["./src/routes/*"]
+    }
+  }
 }
 ```
 

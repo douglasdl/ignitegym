@@ -125,8 +125,8 @@ Eject the Gluestack  theme:
 ```sh
 npx gluestack-ui-scripts eject-theme
 ```
+## Loading component
 
-- Create the folder theme inside src and create the THEME using the extendTheme from native-base.
 
 ## Background Image
 

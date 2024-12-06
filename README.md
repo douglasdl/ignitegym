@@ -121,6 +121,11 @@ npx expo install react-native-svg
 
 ## Customizing the Default Theme
 
+Eject the Gluestack  theme:
+```sh
+npx gluestack-ui-scripts eject-theme
+```
+
 - Create the folder theme inside src and create the THEME using the extendTheme from native-base.
 
 ## Background Image

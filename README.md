@@ -111,22 +111,14 @@ import { StatusBar } from 'react-native';
 
 # 2) Component Library
 
-## Proposal
-
-## Component Library
-
-## Installing the [NativeBase](https://nativebase.io/)
+## Installing the [Gluestack](https://gluestack.io)
 
 Install the dependencies:
 ```sh
-npm install native-base
-npx expo install react-native-svg@12.1.1
-npx expo install react-native-safe-area-context@3.3.2
+npm i @gluestack-ui/themed@1.1.34 @gluestack-style/react@1.0.57 @gluestack-ui/config@1.1.19 --legacy-peer-deps
+npx expo install react-native-svg
 ```
 
-## Using the NativeBase
-
-- Create the Loading component usinf the Center and the Spinner.
 ## Customizing the Default Theme
 
 - Create the folder theme inside src and create the THEME using the extendTheme from native-base.

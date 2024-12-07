@@ -127,7 +127,6 @@ npx gluestack-ui-scripts eject-theme
 ```
 ## Loading component
 
-
 ## Background Image
 
 ## Using SVG
@@ -148,18 +147,17 @@ module.exports = (() => {
 
   config.transformer = {
     ...transformer,
-    babelTransformerPath: require.resolve("react-native-svg-transformer"),
+    babelTransformerPath: require.resolve("react-native-svg-transformer/expo")
   };
   config.resolver = {
     ...resolver,
     assetExts: resolver.assetExts.filter((ext) => ext !== "svg"),
-    sourceExts: [...resolver.sourceExts, "svg"],
+    sourceExts: [...resolver.sourceExts, "svg"]
   };
 
   return config;
 })();
 ```
-## Heading Component
 
 ## Input Component
 

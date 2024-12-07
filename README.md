@@ -205,13 +205,10 @@ touch auth.routes.tsx
 
 ## Create the navigation context
 
-## Removing the Header
-
 ## Modifying the navigation theme
 
 ## Apply authentication navigation
 
-## Define the standard image
 
 # 4) Private Routes
 

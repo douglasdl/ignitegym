@@ -161,6 +161,8 @@ module.exports = (() => {
 
 ## Input Component
 
+## Edit the Input focus
+
 ## Finishing the Inputs
 
 ## Button Component

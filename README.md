@@ -214,9 +214,7 @@ touch auth.routes.tsx
 
 ## Proposal
 
-## Create the App interfaces structure
-
-## Install the bottom navigator
+## App Routes
 
 Install the [bottom-tabs](https://reactnavigation.org/docs/tab-based-navigation)
 ```sh

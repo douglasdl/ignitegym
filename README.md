@@ -237,8 +237,6 @@ npm install @react-navigation/bottom-tabs
 
 ## Styling the Bottom Navigator
 
-## App Routes Recap
-
 # 5) Finishing the interfaces
 
 ## Proposal

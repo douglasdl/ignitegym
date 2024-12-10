@@ -249,6 +249,13 @@ npm install @react-navigation/bottom-tabs
 
 ## Logout Button
 
+- [Lucide React Native](https://lucide.dev/guide/packages/lucide-react-native)
+
+Install the dependencies:
+```sh
+npm install lucide-react-native
+```
+
 ## Finishing the HomeHeader
 
 ## Create the Group component

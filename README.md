@@ -350,6 +350,8 @@ npx expo install expo-file-system
 
 ## Limiting the photo size
 
+- [Pexels](https://www.pexels.com)
+
 ## Using toast messages
 
 ## Recap

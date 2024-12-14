@@ -22,6 +22,7 @@ export function Profile() {
     }
 
     setUserPhoto(photoSelected.assets[0].uri)
+    console.log(photoSelected.assets[0].fileSize)
   }
 
   return (

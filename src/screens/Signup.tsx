@@ -4,12 +4,26 @@ import Logo from "@assets/logo.svg"
 import { Input } from "@components/Input"
 import { Button } from "@components/Button"
 import { useNavigation } from "@react-navigation/native"
+import { useState } from "react"
 
 export function SignUp() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   function handleGoBack() {
     navigation.goBack()
+  }
+
+  function handleSignUp() {
+    console.log({
+      name,
+      email,
+      password,
+      passwordConfirm
+    })
   }
 
   return (
@@ -41,20 +55,32 @@ export function SignUp() {
 
             <Input 
               placeholder="Nome" 
+              onChangeText={setName}
             />
 
             <Input 
               placeholder="E-mail" 
               keyboardType="email-address" 
               autoCapitalize="none" 
+              onChangeText={setEmail}
             />
 
             <Input 
               placeholder="Senha" 
               secureTextEntry
+              onChangeText={setPassword}
+            />
+            
+            <Input 
+              placeholder="Confirme a Senha" 
+              secureTextEntry
+              onChangeText={setPasswordConfirm}
             />
 
-            <Button title="Criar e Acessar" />
+            <Button 
+              title="Criar e Acessar" 
+              onPress={handleSignUp}
+            />
           </Center>  
 
           <Button title="Voltar para o Login" variant="outline" onPress={handleGoBack} />

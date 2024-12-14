@@ -1,11 +1,6 @@
-import { Heading, HStack, Text, VStack, Icon } from "@gluestack-ui/themed"
-import { TouchableOpacityProps } from "react-native"
+import { Heading, HStack, Text, VStack } from "@gluestack-ui/themed"
 
-type Props = TouchableOpacityProps & {
-    data: any;
-};
-
-export function HistoryCard({ data, ...rest }: Props) {
+export function HistoryCard() {
 
   return (
     <HStack w="$full" px="$5" py="$4" bg='$gray600' alignItems='center' justifyContent="space-between" rounded='$md' mb="$3">

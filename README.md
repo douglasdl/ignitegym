@@ -329,6 +329,8 @@ npx expo install expo-image-picker
 
 ## Accessing the Photos Album
 
+- [UI Faces](https://uifaces.co)
+
 ## Enable the image edition
 
 ## Retrive the selected image

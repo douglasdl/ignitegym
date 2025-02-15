@@ -416,6 +416,9 @@ npm install @hookform/resolvers yup
 
 ## About the Backend
 
+- [API Repository](https://github.com/rodrigorgtic/ignitegym-api)
+- [API Documentation](http://localhost:3333/api-docs/)
+
 ## Organizing the Project
 
 ## What is an API

@@ -442,7 +442,7 @@ API: Application Programming Interface
 	- 200: Success.
 	- 201: Created. Usually after a POST insertion.
 
-- 3xx: Redrect
+- 3xx: Redirect
 	- 301: Permanently Moved.
 	- 302: Moved.
 

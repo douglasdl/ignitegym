@@ -1,4 +1,4 @@
-import { Center, Heading, Image, Text, VStack, ScrollView } from "@gluestack-ui/themed"
+import { Center, Heading, Image, Text, VStack, ScrollView, useToast, Toast, ToastTitle, ToastDescription } from "@gluestack-ui/themed"
 import BackgroundImg from "@assets/background.png"
 import Logo from "@assets/logo.svg"
 import { Input } from "@components/Input"
@@ -11,6 +11,7 @@ import { AuthNavigatorRoutesProps } from "@routes/auth.routes"
 import { api } from "@services/api"
 import axios from "axios"
 import { Alert } from "react-native"
+import { AppError } from "@utils/AppError"
 
 type FormDataProps = {
   name: string
@@ -27,6 +28,7 @@ const signUpSchema = yup.object({
 })
 
 export function SignUp() {
+  const toast = useToast();
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
 
   const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
@@ -42,9 +44,21 @@ export function SignUp() {
       const response = await api.post('/users', { name, email, password })
       console.log(response.data)
     } catch (error) {
-      if(axios.isAxiosError(error)) {
-        Alert.alert(error.response?.data.message)
-      }
+      const isAppError = error instanceof AppError;
+      const title = isAppError ? error.message : "Não foi possível criar a conta. Tente novamente mais tarde."
+      toast.show({
+        id: 1,
+        placement: "top",
+        duration: 5000,
+        render: ({ id }) => {
+          const uniqueToastId = "toast-" + id
+          return (
+            <Toast nativeID={uniqueToastId} action="warning" variant="solid" bgColor="$red500" mt="$6">
+              <ToastTitle color="$white">{title}</ToastTitle>
+            </Toast>
+          )
+        },
+      })
     }
   }
 

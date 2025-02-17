@@ -9,6 +9,8 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AuthNavigatorRoutesProps } from "@routes/auth.routes"
 import { api } from "@services/api"
+import axios from "axios"
+import { Alert } from "react-native"
 
 type FormDataProps = {
   name: string
@@ -35,9 +37,15 @@ export function SignUp() {
     navigation.navigate("signIn")
   }
 
-  async function handleSignUp({ name, email, password, password_confirm }: FormDataProps) {
-    const response = await api.post('/users', { name, email, password })
-    console.log(response.data)
+  async function handleSignUp({ name, email, password }: FormDataProps) {
+    try {
+      const response = await api.post('/users', { name, email, password })
+      console.log(response.data)
+    } catch (error) {
+      if(axios.isAxiosError(error)) {
+        Alert.alert(error.response?.data.message)
+      }
+    }
   }
 
   return (
@@ -56,7 +64,7 @@ export function SignUp() {
           position="absolute"
         />
 
-        <VStack flex={1} px="$10" pb="$16">
+        <VStack flex={1} px="$10" gap="$8" pb="$16">
           <Center my="$24">
             <Logo />
             <Text color="$gray100" fontSize="$sm">

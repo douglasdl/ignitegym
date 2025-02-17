@@ -1,4 +1,4 @@
-import { Center, Heading, Image, Text, VStack, ScrollView, useToast, Toast, ToastTitle, ToastDescription } from "@gluestack-ui/themed"
+import { Center, Heading, Image, Text, VStack, ScrollView, useToast, Toast, ToastTitle } from "@gluestack-ui/themed"
 import BackgroundImg from "@assets/background.png"
 import Logo from "@assets/logo.svg"
 import { Input } from "@components/Input"
@@ -9,8 +9,6 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AuthNavigatorRoutesProps } from "@routes/auth.routes"
 import { api } from "@services/api"
-import axios from "axios"
-import { Alert } from "react-native"
 import { AppError } from "@utils/AppError"
 
 type FormDataProps = {
@@ -42,7 +40,7 @@ export function SignUp() {
   async function handleSignUp({ name, email, password }: FormDataProps) {
     try {
       const response = await api.post('/users', { name, email, password })
-      console.log(response.data)
+      console.log(response.data);
     } catch (error) {
       const isAppError = error instanceof AppError;
       const title = isAppError ? error.message : "Não foi possível criar a conta. Tente novamente mais tarde."

@@ -546,21 +546,21 @@ npx expo install @react-native-async-storage/async-storage
 
 # 5) JWT Authentication
 
-## 
+## Proposal - JWT Authentication
 
-## 
+## JWT Authentication
 
-##
+## What is JWT
 
-##
+## Get token from user
 
-##
+## Persisting the User token
 
-##
+## Attaching token on requisitions
 
-##
+## Retrieving the token from storage
 
-##
+## Dereleting the token from storage
 
 
 # 6) Consuming the Backend

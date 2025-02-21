@@ -1,6 +1,7 @@
 import { ExerciseCard } from "@components/ExerciseCard";
 import { Group } from "@components/Group";
 import { HomeHeader } from "@components/HomeHeader";
+import { Loading } from "@components/Loading";
 import { ExerciseDTO } from "@dtos/ExerciseDTO";
 import { Heading, HStack, Text, Toast, ToastTitle, useToast, VStack } from "@gluestack-ui/themed";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
@@ -11,6 +12,7 @@ import { useCallback, useEffect, useState } from "react";
 import { FlatList } from "react-native";
 
 export function Home() {
+  const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation<AppNavigatorRoutesProps>();
   const toast = useToast();
   const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
@@ -46,6 +48,7 @@ export function Home() {
 
   async function fetchExercisesByGroup() {
     try {
+      setIsLoading(true);
       const response = await api.get(`/exercises/bygroup/${groupSelected}`);
       setExercises(response.data);
     } catch (error) {
@@ -64,6 +67,8 @@ export function Home() {
           )
         },
       })
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -96,31 +101,34 @@ export function Home() {
         style={{ marginVertical: 40, maxHeight: 44, minHeight: 44 }}
       />
 
-      <VStack px="$8" flex={1}>
-        <HStack justifyContent="space-between" mb="$5" alignItems="center">
-          <Heading color="$gray200" fontSize="$md" fontFamily="$heading">
-            Exercícios
-          </Heading>
-
-          <Text color="$gray200" fontSize="$sm" fontFamily="$body">
-            {exercises.length}
-          </Text>
-        </HStack>
-
-        <FlatList
-          data={exercises}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <ExerciseCard 
-              data={item}
-              onPress={handleOpenExerciseDetails} 
+      {
+        isLoading ? <Loading /> : (
+          <VStack px="$8" flex={1}>
+            <HStack justifyContent="space-between" mb="$5" alignItems="center">
+              <Heading color="$gray200" fontSize="$md" fontFamily="$heading">
+                Exercícios
+              </Heading>
+    
+              <Text color="$gray200" fontSize="$sm" fontFamily="$body">
+                {exercises.length}
+              </Text>
+            </HStack>
+    
+            <FlatList
+              data={exercises}
+              keyExtractor={item => item.id}
+              renderItem={({ item }) => (
+                <ExerciseCard 
+                  data={item}
+                  onPress={handleOpenExerciseDetails} 
+                />
+              )}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{ paddingBottom: 20 }}
             />
-          )}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 20 }}
-        />
-      </VStack>
-        
+          </VStack>
+        )
+      }
     </VStack>
   )
 }

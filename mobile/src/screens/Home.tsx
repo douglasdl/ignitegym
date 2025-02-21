@@ -17,10 +17,10 @@ export function Home() {
   const toast = useToast();
   const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
   const [groups, setGroups] = useState<string[]>([""]);
-  const [groupSelected, setGroupSelected] = useState(groups[0]);
+  const [groupSelected, setGroupSelected] = useState("antebraço");
 
-  function handleOpenExerciseDetails() {
-    navigation.navigate("exercise")
+  function handleOpenExerciseDetails(exerciseId: string) {
+    navigation.navigate("exercise", { exerciseId })
   }
 
   async function fetchGroups() {
@@ -74,7 +74,7 @@ export function Home() {
 
   useEffect(() => {
     fetchGroups();
-    setGroupSelected(groups[0]);
+    setGroupSelected("antebraço");
   }, []);
 
   useFocusEffect(useCallback(() => {
@@ -120,7 +120,7 @@ export function Home() {
               renderItem={({ item }) => (
                 <ExerciseCard 
                   data={item}
-                  onPress={handleOpenExerciseDetails} 
+                  onPress={() => handleOpenExerciseDetails(item.id)} 
                 />
               )}
               showsVerticalScrollIndicator={false}

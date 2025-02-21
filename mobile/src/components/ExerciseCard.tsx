@@ -2,6 +2,7 @@ import { Heading, HStack, Image, Text, VStack, Icon } from "@gluestack-ui/themed
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { ChevronRight } from 'lucide-react-native';
 import { ExerciseDTO } from "@dtos/ExerciseDTO";
+import { api } from "@services/api";
 
 type Props = TouchableOpacityProps & {
   data: ExerciseDTO
@@ -15,7 +16,7 @@ export function ExerciseCard({ data, ...rest }: Props) {
     >
       <HStack bg='$gray500' alignItems='center' p="$2" pr="$4" rounded='$md' mb="$3">
         <Image
-          source={{ uri: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfEPnJlBmY8dd1qx8EoE_DHPGUbWdtnCbv2jfarKm5BzqDc7BPSycOt7LM50rM16GGdpE&usqp=CAU` }}
+          source={{ uri: `${api.defaults.baseURL}/exercise/thumb/${data.thumb}` }}
           alt='Remada Unilateral'
           w="$16"
           h="$16"

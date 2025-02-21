@@ -1,21 +1,51 @@
 import { ExerciseCard } from "@components/ExerciseCard";
 import { Group } from "@components/Group";
 import { HomeHeader } from "@components/HomeHeader";
-import { Heading, HStack, Text, VStack } from "@gluestack-ui/themed";
+import { Heading, HStack, Text, Toast, ToastTitle, useToast, VStack } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
-import { useState } from "react";
+import { api } from "@services/api";
+import { AppError } from "@utils/AppError";
+import { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 
 export function Home() {
   const navigation = useNavigation<AppNavigatorRoutesProps>();
+  const toast = useToast();
   const [exercises, setExercises] = useState(["Puxada Frontal", "Bicepes", "Tricepes", "Perna", "Abdominal", "Remada curvada", "Remada unilateral", "Levantamento terra"]);
-  const [groups, setGroups] = useState(["Costas", "Biceps", "Triceps", "Ombro"]);
+  const [groups, setGroups] = useState<string[]>([""]);
   const [groupSelected, setGroupSelected] = useState(groups[0]);
 
   function handleOpenExerciseDetails() {
     navigation.navigate("exercise")
   }
+
+  async function fetchGroups() {
+    try {
+      const response = await api.get('/groups');
+      setGroups(response.data);
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError ? error.message : 'Não foi possível carregar os grupos musculares.'
+      toast.show({
+        id: 1,
+        placement: "top",
+        duration: 5000,
+        render: ({ id }) => {
+          const uniqueToastId = "toast-" + id
+          return (
+            <Toast nativeID={uniqueToastId} action="warning" variant="solid" bgColor="$red500" mt="$6">
+              <ToastTitle color="$white">{title}</ToastTitle>
+            </Toast>
+          )
+        },
+      })
+    }
+  }
+
+  useEffect(() => {
+    fetchGroups();
+  }, []);
 
   return (
     <VStack flex={1}>

@@ -305,7 +305,7 @@
                 }
             }
         },
-        "/exercises/{id}": {
+        "/exercises/bygroup/{id}": {
             "get": {
                 "tags": [
                     "Exercise"

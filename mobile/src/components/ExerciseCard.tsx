@@ -4,8 +4,8 @@ import { ChevronRight } from 'lucide-react-native';
 import { ExerciseDTO } from "@dtos/ExerciseDTO";
 
 type Props = TouchableOpacityProps & {
-    data: ExerciseDTO;
-};
+  data: ExerciseDTO
+}
 
 export function ExerciseCard({ data, ...rest }: Props) {
 
@@ -26,11 +26,11 @@ export function ExerciseCard({ data, ...rest }: Props) {
 
         <VStack flex={1}>
           <Heading fontSize='$lg' fontFamily="$heading" color='$white' numberOfLines={1}>
-            Puxada Frontal
+            {data.name}
           </Heading>
 
           <Text fontSize='$sm' color='$gray200' mt='$1' numberOfLines={2}>
-            3 séries x 12 repetições
+            {data.series} séries x {data.repetitions} repetições
           </Text>
         </VStack>
 

@@ -69,7 +69,7 @@ export function Exercise() {
           const uniqueToastId = "toast-" + id
           return (
             <Toast nativeID={uniqueToastId} action="success" variant="solid" bgColor="$green700" mt="$6">
-              <ToastTitle color="$white">Parabéns! Exercício registrado no seu histórico.</ToastTitle>
+              <ToastTitle color="$white" size="sm">Parabéns! Exercício registrado no seu histórico.</ToastTitle>
             </Toast>
           )
         },

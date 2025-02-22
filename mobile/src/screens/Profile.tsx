@@ -73,6 +73,7 @@ export function Profile() {
       }
   
       const photoUri = photoSelected.assets[0].uri;
+      const photoType = photoSelected.assets[0].type;
       if(photoUri) {
         const photoInfo = (await FileSystem.getInfoAsync(photoUri)) as {
           size: number
@@ -92,7 +93,15 @@ export function Profile() {
             )
           })
         }
-        setUserPhoto(photoUri)
+
+        const fileExtension = photoUri.split('.').pop();
+        const username = user.name.split(" ")[0];
+        const photoFile = {
+          name: `${username}.${fileExtension}`.toLowerCase(),
+          uri: photoUri,
+          type: `${photoType}/${fileExtension}`
+        }
+        console.log(photoFile)
       }
     } catch (error) {
       console.log(error);

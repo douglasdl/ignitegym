@@ -100,8 +100,32 @@ export function Profile() {
           name: `${username}.${fileExtension}`.toLowerCase(),
           uri: photoUri,
           type: `${photoType}/${fileExtension}`
-        }
-        console.log(photoFile)
+        } as any;
+        
+        const userPhotoUploadForm = new FormData();
+        userPhotoUploadForm.append('avatar', photoFile);
+
+        await api.patch('/users/avatar', userPhotoUploadForm, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+
+        const title = "Foto atualizada com sucesso!";
+        toast.show({
+          id: 1,
+          placement: "top",
+          duration: 5000,
+          render: ({ id }) => {
+            return (
+              <ToastMessage
+                id={id}
+                title={title}
+                action="success"
+              />
+            )
+          },
+        })
       }
     } catch (error) {
       console.log(error);

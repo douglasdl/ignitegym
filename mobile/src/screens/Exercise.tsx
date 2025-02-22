@@ -1,4 +1,4 @@
-import { Heading, HStack, Icon, Text, VStack, Image, Box, Toast, ToastTitle, useToast } from "@gluestack-ui/themed"
+import { Heading, HStack, Icon, Text, VStack, Image, Box, useToast } from "@gluestack-ui/themed"
 import { useNavigation, useRoute } from "@react-navigation/native"
 import { AppNavigatorRoutesProps } from "@routes/app.routes"
 import { ArrowLeft } from "lucide-react-native"
@@ -12,6 +12,7 @@ import { api } from "@services/api"
 import { useEffect, useState } from "react"
 import { ExerciseDTO } from "@dtos/ExerciseDTO"
 import { Loading } from "@components/Loading"
+import { ToastMessage } from "@components/ToastMessage"
 
 interface RoutesParamsProps {
   exerciseId: string
@@ -44,11 +45,12 @@ export function Exercise() {
         placement: "top",
         duration: 5000,
         render: ({ id }) => {
-          const uniqueToastId = "toast-" + id
           return (
-            <Toast nativeID={uniqueToastId} action="warning" variant="solid" bgColor="$red500" mt="$6">
-              <ToastTitle color="$white">{title}</ToastTitle>
-            </Toast>
+            <ToastMessage
+              id={id}
+              title={title}
+              action="error"
+            />
           )
         },
       })
@@ -61,16 +63,18 @@ export function Exercise() {
     try {
       setIsSendingRegister(true);
       await api.post('/history', { exercise_id: exerciseId });
+      const title = "Parabéns! Exercício registrado no seu histórico.";
       toast.show({
         id: 1,
         placement: "top",
         duration: 5000,
         render: ({ id }) => {
-          const uniqueToastId = "toast-" + id
           return (
-            <Toast nativeID={uniqueToastId} action="success" variant="solid" bgColor="$green700" mt="$6">
-              <ToastTitle color="$white" size="sm">Parabéns! Exercício registrado no seu histórico.</ToastTitle>
-            </Toast>
+            <ToastMessage
+              id={id}
+              title={title}
+              action="success"
+            />
           )
         },
       })
@@ -83,11 +87,12 @@ export function Exercise() {
         placement: "top",
         duration: 5000,
         render: ({ id }) => {
-          const uniqueToastId = "toast-" + id
           return (
-            <Toast nativeID={uniqueToastId} action="warning" variant="solid" bgColor="$red500" mt="$6">
-              <ToastTitle color="$white">{title}</ToastTitle>
-            </Toast>
+            <ToastMessage
+              id={id}
+              title={title}
+              action="error"
+            />
           )
         },
       })

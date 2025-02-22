@@ -1,6 +1,6 @@
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigation } from "@react-navigation/native"
-import { Center, Heading, Image, Text, VStack, ScrollView, useToast, Toast, ToastTitle } from "@gluestack-ui/themed"
+import { Center, Heading, Image, Text, VStack, ScrollView, useToast } from "@gluestack-ui/themed"
 
 import { AuthNavigatorRoutesProps } from "@routes/auth.routes"
 
@@ -12,6 +12,7 @@ import { Button } from "@components/Button"
 import { useAuth } from '@hooks/useAuth'
 import { AppError } from '@utils/AppError'
 import { useState } from 'react'
+import { ToastMessage } from '@components/ToastMessage'
 
 type FormData = {
   email: string
@@ -45,11 +46,12 @@ export function SignIn() {
         placement: "top",
         duration: 5000,
         render: ({ id }) => {
-          const uniqueToastId = "toast-" + id
           return (
-            <Toast nativeID={uniqueToastId} action="warning" variant="solid" bgColor="$red500" mt="$6">
-              <ToastTitle color="$white">{title}</ToastTitle>
-            </Toast>
+            <ToastMessage
+              id={id}
+              title={title}
+              action="error"
+            />
           )
         },
       });

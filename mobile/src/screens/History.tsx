@@ -1,12 +1,13 @@
 import { HistoryCard } from "@components/HistoryCard";
 import { Loading } from "@components/Loading";
 import { ScreenHeader } from "@components/ScreenHeader";
+import { ToastMessage } from "@components/ToastMessage";
 import { HistoryByDayDTO } from "@dtos/HistoryByDayDTO";
-import { Heading, VStack, Text, Toast, ToastTitle, useToast } from "@gluestack-ui/themed";
+import { Heading, VStack, Text, useToast } from "@gluestack-ui/themed";
 import { useFocusEffect } from "@react-navigation/native";
 import { api } from "@services/api";
 import { AppError } from "@utils/AppError";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { SectionList } from "react-native";
 
 export function History() {
@@ -27,11 +28,12 @@ export function History() {
         placement: "top",
         duration: 5000,
         render: ({ id }) => {
-          const uniqueToastId = "toast-" + id
           return (
-            <Toast nativeID={uniqueToastId} action="warning" variant="solid" bgColor="$red500" mt="$6">
-              <ToastTitle color="$white">{title}</ToastTitle>
-            </Toast>
+            <ToastMessage
+              id={id}
+              title={title}
+              action="error"
+            />
           )
         },
       })

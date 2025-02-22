@@ -6,7 +6,7 @@ type Props = {
   title: string
   description?: string
   action?: "error" | "success"
-  onClose: () => void
+  onClose?: () => void
 }
 
 export function ToastMessage({ id, title, description, action = "success", onClose } :Props) {
@@ -15,12 +15,16 @@ export function ToastMessage({ id, title, description, action = "success", onClo
       nativeID={`toast-${id}`}
       action={action}
       bgColor={action === "success" ? "$green500" : "$red500"}
-      mt="$10"
+      mt="$6"
     >
       <VStack space="xs" w="$full">
-        <Pressable alignSelf="flex-end" onPress={onClose}>
-          <Icon as={X} color="$coolGray50" size="md" />
-        </Pressable>
+        {
+          onClose && (
+            <Pressable alignSelf="flex-end" onPress={onClose}>
+              <Icon as={X} color="$coolGray50" size="md" />
+            </Pressable>
+          )
+        }
 
         <ToastTitle color="$white" fontFamily="$heading">
           {title}

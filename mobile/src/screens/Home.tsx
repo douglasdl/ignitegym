@@ -2,8 +2,9 @@ import { ExerciseCard } from "@components/ExerciseCard";
 import { Group } from "@components/Group";
 import { HomeHeader } from "@components/HomeHeader";
 import { Loading } from "@components/Loading";
+import { ToastMessage } from "@components/ToastMessage";
 import { ExerciseDTO } from "@dtos/ExerciseDTO";
-import { Heading, HStack, Text, Toast, ToastTitle, useToast, VStack } from "@gluestack-ui/themed";
+import { Heading, HStack, Text, useToast, VStack } from "@gluestack-ui/themed";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
 import { api } from "@services/api";
@@ -35,11 +36,12 @@ export function Home() {
         placement: "top",
         duration: 5000,
         render: ({ id }) => {
-          const uniqueToastId = "toast-" + id
           return (
-            <Toast nativeID={uniqueToastId} action="warning" variant="solid" bgColor="$red500" mt="$6">
-              <ToastTitle color="$white">{title}</ToastTitle>
-            </Toast>
+            <ToastMessage
+              id={id}
+              title={title}
+              action="error"
+            />
           )
         },
       })
@@ -59,11 +61,12 @@ export function Home() {
         placement: "top",
         duration: 5000,
         render: ({ id }) => {
-          const uniqueToastId = "toast-" + id
           return (
-            <Toast nativeID={uniqueToastId} action="warning" variant="solid" bgColor="$red500" mt="$6">
-              <ToastTitle color="$white">{title}</ToastTitle>
-            </Toast>
+            <ToastMessage
+              id={id}
+              title={title}
+              action="error"
+            />
           )
         },
       })

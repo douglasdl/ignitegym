@@ -2,7 +2,7 @@ import { Button } from "@components/Button"
 import { Input } from "@components/Input"
 import { ScreenHeader } from "@components/ScreenHeader"
 import { UserPhoto } from "@components/UserPhoto"
-import { Center, Heading, Text, Toast, ToastTitle, VStack, useToast } from "@gluestack-ui/themed"
+import { Center, Heading, Text, VStack, useToast } from "@gluestack-ui/themed"
 import { ScrollView, TouchableOpacity } from "react-native"
 import * as ImagePicker from "expo-image-picker"
 import * as FileSystem from "expo-file-system"
@@ -79,13 +79,14 @@ export function Profile() {
         }
   
         if(photoInfo.size && (photoInfo.size / 1024 / 1024) > 5) {
+          const title = 'Essa imagem é muito grande. Escolha uma imagem de até 5MB.'
           return toast.show({
             placement: "top",
             render: ({ id }) => (
               <ToastMessage 
                 id={id}
                 action="error"
-                title="Essa imagem é muito grande. Escolha uma imagem de até 5MB."
+                title={title}
                 onClose={() => toast.close(id)}
               />
             )
@@ -105,16 +106,18 @@ export function Profile() {
       userUpdated.name = data.name;
       await api.put('/users', data);
       await updateUserProfile(userUpdated);
+      const title = "Perfil atualizado com sucesso!";
       toast.show({
         id: 1,
         placement: "top",
         duration: 5000,
         render: ({ id }) => {
-          const uniqueToastId = "toast-" + id
           return (
-            <Toast nativeID={uniqueToastId} action="success" variant="solid" bgColor="$green700" mt="$6">
-              <ToastTitle color="$white" size="sm">Perfil atualizado com sucesso!</ToastTitle>
-            </Toast>
+            <ToastMessage
+              id={id}
+              title={title}
+              action="success"
+            />
           )
         },
       })
@@ -128,11 +131,12 @@ export function Profile() {
         placement: "top",
         duration: 5000,
         render: ({ id }) => {
-          const uniqueToastId = "toast-" + id
           return (
-            <Toast nativeID={uniqueToastId} action="warning" variant="solid" bgColor="$red500" mt="$6">
-              <ToastTitle color="$white">{title}</ToastTitle>
-            </Toast>
+            <ToastMessage
+              id={id}
+              title={title}
+              action="error"
+            />
           )
         },
       })

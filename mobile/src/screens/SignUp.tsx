@@ -1,4 +1,4 @@
-import { Center, Heading, Image, Text, VStack, ScrollView, useToast, Toast, ToastTitle } from "@gluestack-ui/themed"
+import { Center, Heading, Image, Text, VStack, ScrollView, useToast } from "@gluestack-ui/themed"
 import BackgroundImg from "@assets/background.png"
 import Logo from "@assets/logo.svg"
 import { Input } from "@components/Input"
@@ -12,6 +12,7 @@ import { api } from "@services/api"
 import { AppError } from "@utils/AppError"
 import { useState } from "react"
 import { useAuth } from "@hooks/useAuth"
+import { ToastMessage } from "@components/ToastMessage"
 
 type FormDataProps = {
   name: string
@@ -55,11 +56,12 @@ export function SignUp() {
         placement: "top",
         duration: 5000,
         render: ({ id }) => {
-          const uniqueToastId = "toast-" + id
           return (
-            <Toast nativeID={uniqueToastId} action="warning" variant="solid" bgColor="$red500" mt="$6">
-              <ToastTitle color="$white">{title}</ToastTitle>
-            </Toast>
+            <ToastMessage
+              id={id}
+              title={title}
+              action="error"
+            />
           )
         },
       })

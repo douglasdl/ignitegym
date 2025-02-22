@@ -14,6 +14,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AppError } from "@utils/AppError"
 import { api } from "@services/api"
+import defaultUserPhotoImg from '@assets/userPhotoDefault.png'
 
 const PHOTO_SIZE = 33;
 
@@ -46,7 +47,6 @@ const profileSchema = yup.object({
 export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [userPhoto, setUserPhoto] = useState("https://github.com/douglasdl.png");
 
   const toast = useToast();
   const { user, updateUserProfile } = useAuth();
@@ -105,11 +105,15 @@ export function Profile() {
         const userPhotoUploadForm = new FormData();
         userPhotoUploadForm.append('avatar', photoFile);
 
-        await api.patch('/users/avatar', userPhotoUploadForm, {
+        const avatarUpdatedResponse = await api.patch('/users/avatar', userPhotoUploadForm, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
+
+        const userUpdated = user;
+        userUpdated.avatar = avatarUpdatedResponse.data.avatar;
+        updateUserProfile(userUpdated);
 
         const title = "Foto atualizada com sucesso!";
         toast.show({
@@ -185,7 +189,10 @@ export function Profile() {
       <ScrollView contentContainerStyle={{ paddingBottom: 36 }}>
         <Center mt="$6" px="$10">
           <UserPhoto 
-            source={{ uri: userPhoto}} 
+            source={
+              user.avatar 
+                ? { uri: `${api.defaults.baseURL}/avatar/${user.avatar}` } 
+                : defaultUserPhotoImg }  
             alt="Foto do usuário"
             size="xl"
           />

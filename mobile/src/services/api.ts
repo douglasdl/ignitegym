@@ -14,11 +14,23 @@ const api = axios.create({
 api.registerInterceptTokenManager = signOut => {
   const interceptTokenManager = api.interceptors.response.use((response) => {
     return response;
-  }, (error) => {
-    if(error.response && error.response.data) {
-      return Promise.reject(new AppError(error.response.data.message));
+  }, (requetError) => {
+    const isNotAuthorized = requetError?.response?.status === 401;
+    if(isNotAuthorized) {
+      if(requetError.response.data?.message === 'token.expired' || requetError.response.data?.message === 'token.invalid') {
+        
+      }
+
+      signOut();
+    }
+
+
+
+
+    if(requetError.response && requetError.response.data) {
+      return Promise.reject(new AppError(requetError.response.data.message));
     } else {
-      return Promise.reject(new AppError("Erro no servidor. Tente novamente mais tarde."));
+      return Promise.reject(requetError);
     }
   });
 

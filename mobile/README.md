@@ -565,91 +565,86 @@ npx expo install @react-native-async-storage/async-storage
 
 # 6) Consuming the Backend
 
-##
+## Proposal - Consuming the Backend
 
-## 
+## Search and List the Groups
 
-##
+## Search Exercises by Group
 
-##
+## Create the ExerciseDTO
 
-##
+## Show the Exercises by Group
 
-##
+## Image Loading
 
-##
+## Use the Loading component
 
-##
+## Get the Exercise ID
 
-## 
+## Show the Exercise Details
 
-##
+## Loading Handle
 
-##
+## History Register
 
-##
+## History Loading
 
-##
+## History List
 
-##
+## Show the History Data
 
-##
+## Load the User Data in the Profile
 
-## 
+## Get the User Data to Update
 
-##
+## Prepare the form validation
 
-##
+## Password Validation
 
-##
+## Password Conditional Validation
 
-##
+## Password Validation Adjustments
 
-##
+## Update the user data in the backend
 
-##
+## Update the user data in the storage and state
 
-##
+## Test the new password
 
 
 # 7) Image Upload
 
-## 
+## Proposal - Image Upload
 
-##
+## Prepare the image data
 
-##
+## Image Upload
 
-##
+## Update the image in the device
 
-##
-
-##
-
-##
+## Show the updated avatar
 
 
 # 8) Refresh Token
 
-## 
+## Proposal - Refresh Token
 
-## 
+## Refresh Token Concept
 
-##
+## Refresh Token Flow
 
-##
+## Include Token Manager in the application
 
-##
+## Check if the token is valid
 
-##
+## Add requisitions to the buffer
 
-##
+## Search a new Token
 
-##
+## Resend the requisition
 
-##
+## History Loading
 
-##
+## Refresh Token Variations
 
-##
-
+## Module Ending
